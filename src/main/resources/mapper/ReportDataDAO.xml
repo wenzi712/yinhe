@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhe.dao.ReportDataDAO">
+    <!--增收系数计算表-->
+    <select id="listZengShouXiShuJiSuanBiao" parameterType="map" resultType="map">
+        SELECT
+        营业部 AS Department,
+        部门 AS Organization,
+        姓名 AS Name,
+        流失佣金收入 AS Row01,
+        流失资产收入 AS Row02,
+        隐形流失资产 AS Row03,
+        利差 AS Row04,
+        息费 AS Row05,
+        净佣 AS Row06,
+        两融净佣 AS Row07,
+        天天利 AS Row08,
+        水星1 AS Row09,
+        水星2 AS Row10,
+        产品销售收入 AS Row11,
+        降佣损失 AS Row12,
+        收入合计 AS Row13,
+        收入市占率13 AS Row14,
+        本期市场收入 AS Row15,
+        本期目标创收额 AS Row16,
+        收入市占差值 AS Row17,
+        收入市占率 AS Row18,
+        增收系数 AS Row19
+        FROM ${TableName}
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="Department != null">
+                营业部 = #{Department}
+            </if>
+            <if test="Organization != null">
+                AND 部门 = #{Organization}
+            </if>
+            <if test="Name != null">
+                AND 姓名 = #{Name}
+            </if>
+        </trim>
+    </select>
+
+    <!--提成基数计算表-->
+    <select id="listTiChengJiShuJiSuanBiao" parameterType="map" resultType="map">
+        SELECT
+        营业部 AS Department,
+        部门 AS Organization,
+        姓名 AS Name,
+        流失佣金基数 AS Row01,
+        流失资产基数 AS Row02,
+        息费 AS Row03,
+        净佣 AS Row04,
+        两融净佣 AS Row05,
+        息费 * 分段标识1 * 分段标识2 AS Row06,
+        可提成基数 AS Row07,
+        资产贡献度 AS Row08,
+        提成基数 AS Row09
+        FROM ${TableName}, 积分参数表
+        WHERE 参数名称 = '月度提成基数系数'
+        <if test="Department != null">
+            AND 营业部 = #{Department}
+        </if>
+        <if test="Organization != null">
+            AND 部门 = #{Organization}
+        </if>
+        <if test="Name != null">
+            AND 姓名 = #{Name}
+        </if>
+    </select>
+
+    <!--服务奖金发放表-->
+    <select id="listFuWuJiangJinFaFangBiao" parameterType="map" resultType="map">
+        SELECT
+        营业部 AS Department,
+        部门 AS Organization,
+        姓名 AS Name,
+        服务奖金发放值 AS Row01
+        FROM ${TableName}
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="Department != null">
+                营业部 = #{Department}
+            </if>
+            <if test="Organization != null">
+                AND 部门 = #{Organization}
+            </if>
+            <if test="Name != null">
+                AND 姓名 = #{Name}
+            </if>
+        </trim>
+    </select>
+
+    <!--服务奖金计算表-->
+    <select id="listFuWuJiangJinJiSuanBiao" parameterType="map" resultType="map">
+        SELECT
+        营业部 AS Department,
+        部门 AS Organization,
+        姓名 AS Name,
+        客户数 AS Row01,
+        总资产 AS Row02,
+        提成基数 AS Row03,
+        对应提成比例 AS Row04,
+        提成基数 * 对应提成比例 AS Row05,
+        增收系数 AS Row06,
+        有效覆盖系数 AS Row07,
+        重大任务系数1 AS Row08,
+        重大任务系数2 AS Row09,
+        重大任务系数3 AS Row10,
+        重大任务系数4 AS Row11,
+        重大任务系数5 AS Row12,
+        服务奖金预发放值 AS Row13
+        FROM ${TableName}
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="Department != null">
+                营业部 = #{Department}
+            </if>
+            <if test="Organization != null">
+                AND 部门 = #{Organization}
+            </if>
+            <if test="Name != null">
+                AND 姓名 = #{Name}
+            </if>
+        </trim>
+    </select>
+
+    <!--积分表-->
+    <select id="listJiFenBiao" parameterType="map" resultType="map">
+        SELECT
+        营业部 AS Department,
+        部门 AS Organization,
+        姓名 AS Name,
+        客户数 AS Row01,
+        总资产 AS Row02,
+        权益产品 AS Row03,
+        权益产品积分 AS Row04,
+        固定产品 AS Row05,
+        固定产品积分 AS Row06,
+        产品总分 AS Row07,
+        新开户 AS Row08,
+        新开户积分 AS Row09,
+        新开户1w AS Row10,
+        新开户1w积分 AS Row11,
+        新开户10w AS Row12,
+        新开户10w积分 AS Row13,
+        新开户50w AS Row14,
+        新开户50w积分 AS Row15,
+        新增资产 AS Row16,
+        新增资产积分 AS Row17,
+        新开户总分 AS Row18,
+        两融开户 AS Row19,
+        两融开户积分 AS Row20,
+        余额市占率差额 AS Row21,
+        余额市占率差额得分 AS Row22,
+        两融总分 AS Row23,
+        其他开户 AS Row39,
+        其他开户积分 AS Row40,
+        其他资产 AS Row41,
+        其他资产积分 AS Row42,
+        流失客户数 AS Row24,
+        流失客户数积分 AS Row25,
+        流失资产 AS Row26,
+        流失资产积分 AS Row27,
+        隐形流失资产 / 0.005 / 10000 AS Row28,
+        隐形流失资产积分 AS Row29,
+        流失年佣金 AS Row30,
+        流失年佣金积分 AS Row31,
+        流失总分 AS Row32,
+        合规 AS Row33,
+        行政评价 AS Row34,
+        月度积分总分 AS Row35,
+        积分合格线 AS Row36,
+        积分完成率 AS Row37,
+        对应提成比例 AS Row38,
+        续做固定产品 AS Row43,
+        续做固定产品积分 AS Row44,
+        降佣客户 AS Row45,
+        降佣客户积分 AS Row46
+        FROM ${TableName}
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="Department != null">
+                营业部 = #{Department}
+            </if>
+            <if test="Organization != null">
+                AND 部门 = #{Organization}
+            </if>
+            <if test="Name != null">
+                AND 姓名 = #{Name}
+            </if>
+        </trim>
+    </select>
+
+    <!--资产贡献度达标率表-->
+    <select id="listZiChanGongXianDuDaBiaoLvBiao" parameterType="map" resultType="map">
+        SELECT
+        营业部 AS Department,
+        部门 AS Organization,
+        姓名 AS Name,
+        客户数 AS Row01,
+        达标客户 AS Row02,
+        资产贡献度 AS Row03
+        FROM ${TableName}
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="Department != null">
+                营业部 = #{Department}
+            </if>
+            <if test="Organization != null">
+                AND 部门 = #{Organization}
+            </if>
+            <if test="Name != null">
+                AND 姓名 = #{Name}
+            </if>
+        </trim>
+    </select>
+</mapper>

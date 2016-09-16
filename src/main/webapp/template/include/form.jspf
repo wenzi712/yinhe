@@ -1,0 +1,22 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<script src="${pageContext.request.contextPath}/webjars/jquery-form/3.51/jquery.form.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/webjars/jquery-serializejson/2.5.0/jquery.serializejson.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/webjars/bootstrap-validator/0.9.0/dist/validator.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+</script>

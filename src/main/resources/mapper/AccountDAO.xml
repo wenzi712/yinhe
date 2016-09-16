@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yinhe.dao.AccountDAO">
+    <select id="listAll" resultType="com.yinhe.model.Account">
+        SELECT
+            营业部 AS Department,
+            部门  AS Organization,
+            姓名  AS Name,
+            角色  AS Role,
+            存档权限 AS Export,
+            登陆名 AS LoginID,
+            ''  AS Password
+        FROM 用户表
+        WHERE 姓名 != '管理员'
+    </select>
+
+    <select id="exist" resultType="int" parameterType="string">
+        SELECT COUNT(*)
+        FROM 用户表
+        WHERE 登陆名 = #{LoginID}
+    </select>
+
+    <select id="get" resultType="com.yinhe.model.Account" parameterType="string">
+        SELECT
+            营业部 AS Department,
+            部门  AS Organization,
+            姓名  AS Name,
+            角色  AS Role,
+            存档权限 AS Export,
+            登陆名 AS LoginID,
+            密码  AS Password
+        FROM 用户表
+        WHERE 登陆名 = #{LoginID}
+    </select>
+
+    <insert id="add" parameterType="com.yinhe.model.Account">
+        INSERT INTO 用户表 (
+            营业部,
+            部门,
+            姓名,
+            角色,
+            存档权限,
+            登陆名,
+            密码
+        ) VALUES (
+            #{Department},
+            #{Organization},
+            #{Name},
+            #{Role},
+            #{Export},
+            #{LoginID},
+            #{Password}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM 用户表
+        WHERE 登陆名 = #{LoginID}
+    </delete>
+
+    <update id="update" parameterType="com.yinhe.model.Account">
+        UPDATE 用户表
+        <set>
+            <if test="Role != null">角色 = #{Role},</if>
+            <if test="Export != null">存档权限 = #{Export},</if>
+            <if test="LoginID != null">登陆名 = #{LoginID},</if>
+            <if test="Password != null">密码 = #{Password}</if>
+        </set>
+        WHERE 营业部 = #{Department} AND 部门 = #{Organization} AND 姓名 = #{Name}
+    </update>
+</mapper>

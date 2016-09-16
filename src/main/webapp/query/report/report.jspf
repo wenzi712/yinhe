@@ -1,0 +1,5 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ page pageEncoding="UTF-8" %>
+
+<link href="report.css" type="text/css" rel="stylesheet"/>
+<script src="report.js" type="text/javascript"></script>

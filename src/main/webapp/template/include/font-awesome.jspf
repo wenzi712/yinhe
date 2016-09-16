@@ -1,0 +1,4 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<link href="${pageContext.request.contextPath}/webjars/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="${pageContext.request.contextPath}/css/awesome-bootstrap-checkbox.css" rel="stylesheet"/>

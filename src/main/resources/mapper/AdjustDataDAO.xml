@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yinhe.dao.AdjustDataDAO">
+    <select id="listAll" parameterType="map" resultType="com.yinhe.model.AdjustData">
+        SELECT
+        营业部 AS Department,
+        部门 AS Organization,
+        姓名 AS Name,
+        服务奖金预发放值 AS Payment,
+        部门调整额 AS Adjust,
+        部门调整备注 AS Remark
+        FROM 月度考核
+        WHERE 姓名 != '总计'
+        <if test="Department != null">
+            AND 营业部 = #{Department}
+        </if>
+        <if test="Organization != null">
+            AND 部门 = #{Organization}
+        </if>
+    </select>
+
+    <update id="update" parameterType="com.yinhe.model.AdjustData">
+        UPDATE 月度考核
+        SET
+            部门调整额   = #{Adjust},
+            部门调整备注  = #{Remark},
+            服务奖金发放值 = #{Payment} + #{Adjust}
+        WHERE
+            营业部 = #{Department} AND 部门 = #{Organization} AND 姓名 = #{Name}
+    </update>
+</mapper>

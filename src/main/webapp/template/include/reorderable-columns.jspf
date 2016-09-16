@@ -1,0 +1,6 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<script src="${pageContext.request.contextPath}/webjars/jquery-ui/1.11.4/jquery-ui.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/webjars/bootstrap-table/1.9.1/extensions/reorder-columns/bootstrap-table-reorder-columns.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.dragtable.js" type="text/javascript"></script>
+<link href="${pageContext.request.contextPath}/css/dragtable.css" rel="stylesheet" type="text/css">

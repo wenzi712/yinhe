@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yinhe.dao.AuthorityDAO">
+    <select id="get" resultType="string" parameterType="string">
+        SELECT DISTINCT 权限 AS Authority
+        FROM 权限表
+        WHERE 角色 = #{Role}
+    </select>
+    <select id="list" resultType="string">
+        SELECT 角色
+        FROM 权限表
+    </select>
+</mapper>

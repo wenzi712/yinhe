@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yinhe.dao.ImportDataDAO">
+    <select id="listAll" resultType="com.yinhe.model.ImportData">
+        SELECT
+            营业部       AS Department,
+            部门        AS Organization,
+            其他开户    AS OtherAccount,
+            其他资产    AS OtherAsset,
+            姓名        AS Name,
+            合规        AS HeGui,
+            行政评价      AS XingZhengPingJia,
+            有效覆盖系数    AS YouXiaoFuGaiXiShu,
+            重大任务系数1   AS ZhongDaRenWuXiShu1,
+            重大任务系数2   AS ZhongDaRenWuXiShu2,
+            重大任务系数3   AS ZhongDaRenWuXiShu3,
+            重大任务系数4   AS ZhongDaRenWuXiShu4,
+            重大任务系数5   AS ZhongDaRenWuXiShu5,
+            重大任务系数权重1 AS ZhongDaRenWuXiShuQuanZhong1,
+            重大任务系数权重2 AS ZhongDaRenWuXiShuQuanZhong2,
+            重大任务系数权重3 AS ZhongDaRenWuXiShuQuanZhong3,
+            重大任务系数权重4 AS ZhongDaRenWuXiShuQuanZhong4,
+            重大任务系数权重5 AS ZhongDaRenWuXiShuQuanZhong5
+        FROM 月度考核
+        WHERE 部门 != '无' AND 姓名 != '总计'
+    </select>
+
+    <update id="update" parameterType="com.yinhe.model.ImportData">
+        UPDATE 月度考核
+        <set>
+            <if test="OtherAccount != null">其他开户 = #{OtherAccount},</if>
+            <if test="OtherAsset != null">其他资产 = #{OtherAsset},</if>
+            <if test="HeGui != null">合规 = #{HeGui},</if>
+            <if test="XingZhengPingJia != null">行政评价 = #{XingZhengPingJia},</if>
+            <if test="YouXiaoFuGaiXiShu != null">有效覆盖系数 = #{YouXiaoFuGaiXiShu},</if>
+            <if test="ZhongDaRenWuXiShu1 != null">重大任务系数1 = #{ZhongDaRenWuXiShu1},</if>
+            <if test="ZhongDaRenWuXiShu2 != null">重大任务系数2 = #{ZhongDaRenWuXiShu2},</if>
+            <if test="ZhongDaRenWuXiShu3 != null">重大任务系数3 = #{ZhongDaRenWuXiShu3},</if>
+            <if test="ZhongDaRenWuXiShu4 != null">重大任务系数4 = #{ZhongDaRenWuXiShu4},</if>
+            <if test="ZhongDaRenWuXiShu5 != null">重大任务系数5 = #{ZhongDaRenWuXiShu5},</if>
+            <if test="ZhongDaRenWuXiShuQuanZhong1 != null">重大任务系数权重1 = #{ZhongDaRenWuXiShuQuanZhong1},</if>
+            <if test="ZhongDaRenWuXiShuQuanZhong2 != null">重大任务系数权重2 = #{ZhongDaRenWuXiShuQuanZhong2},</if>
+            <if test="ZhongDaRenWuXiShuQuanZhong3 != null">重大任务系数权重3 = #{ZhongDaRenWuXiShuQuanZhong3},</if>
+            <if test="ZhongDaRenWuXiShuQuanZhong4 != null">重大任务系数权重4 = #{ZhongDaRenWuXiShuQuanZhong4},</if>
+            <if test="ZhongDaRenWuXiShuQuanZhong5 != null">重大任务系数权重5 = #{ZhongDaRenWuXiShuQuanZhong5}</if>
+        </set>
+        WHERE 营业部 = #{Department} AND 部门 = #{Organization} AND 姓名 = #{Name}
+    </update>
+</mapper>

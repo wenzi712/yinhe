@@ -1,0 +1,10 @@
+<%@ page import="com.yinhe.config.Parameter" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page pageEncoding="UTF-8" %>
+
+<div class="container body-content">
+    <hr/>
+    <footer>
+        © 2015-<%= Calendar.getInstance().get(Calendar.YEAR)%> <%= Parameter.COMPANY%>。保留所有权利。
+    </footer>
+</div>

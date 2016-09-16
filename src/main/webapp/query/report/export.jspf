@@ -1,0 +1,33 @@
+<%@ page import="com.yinhe.model.Account" %>
+<%@ page import="org.apache.shiro.SecurityUtils" %>
+<%@ page pageEncoding="UTF-8" %>
+
+<%
+    if (((Account) SecurityUtils.getSubject().getPrincipal()).getExport()) {
+%>
+<button id="exportTable" name="export" class="btn btn-primary btn-lg">导出为Excel</button>
+<script type="text/javascript">
+    $("#exportTable").click(function () {
+        $("#table").tableExport({
+            type: "xls",
+            fileName: tableName
+        });
+    });
+</script>
+<button id="printTable" name="print" class="btn btn-primary btn-lg">打印</button>
+<script type="text/javascript">
+    $("#printTable").click(function () {
+        $("#table").print({
+            globalStyles: true,
+            mediaPrint: false,
+            manuallyCopyFormValues: false,
+            deferred: $.Deferred(),
+            timeout: 250,
+            title: tableName,
+            doctype: '<!doctype html>'
+        });
+    });
+</script>
+<%
+    }
+%>

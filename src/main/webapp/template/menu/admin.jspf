@@ -1,0 +1,23 @@
+<%@ page pageEncoding="UTF-8" %>
+
+
+    <ul class="nav navbar-nav">
+        <li><a href="${pageContext.request.contextPath}">首页</a></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">系统参数设置<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="${pageContext.request.contextPath}/config/部门二次考核.jsp">部门二次考核</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">报表查询<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="${pageContext.request.contextPath}/query/report/增收系数计算表.jsp">增收系数计算表</a></li>
+                <li><a href="${pageContext.request.contextPath}/query/report/提成基数计算表.jsp">提成基数计算表</a></li>
+                <li><a href="${pageContext.request.contextPath}/query/report/服务奖金发放表.jsp">服务奖金发放表</a></li>
+                <li><a href="${pageContext.request.contextPath}/query/report/服务奖金计算表.jsp">服务奖金计算表</a></li>
+                <li><a href="${pageContext.request.contextPath}/query/report/积分表.jsp">积分表</a></li>
+                <li><a href="${pageContext.request.contextPath}/query/report/资产贡献度达标率表.jsp">资产贡献度达标率表</a></li>
+            </ul>
+        </li>
+    </ul>

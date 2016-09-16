@@ -1,0 +1,11 @@
+.string {
+    overflow: auto;
+    text-overflow: ellipsis;
+    min-width: 11em;
+}
+
+.double {
+    overflow: auto;
+    text-overflow: ellipsis;
+    min-width: 6em;
+}

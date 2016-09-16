@@ -1,0 +1,5 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<script src="${pageContext.request.contextPath}/webjars/bootstrap-table/1.9.1/extensions/reorder-rows/bootstrap-table-reorder-rows.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.tablednd.js" type="text/javascript"></script>
+<link href="${pageContext.request.contextPath}/webjars/bootstrap-table/1.9.1/extensions/reorder-rows/bootstrap-table-reorder-rows.css" rel="stylesheet" type="text/css">
